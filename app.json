@@ -7,24 +7,51 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "scheme": "zubale-checkin",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1a1a2e"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.zubale.securecheckin",
+      "infoPlist": {
+        "NSCameraUsageDescription": "We need camera access to take check-in photos at the store location.",
+        "NSLocationWhenInUseUsageDescription": "We need your location to verify you are at the store for check-in.",
+        "NSLocationAlwaysUsageDescription": "We need location access to verify your presence at the store."
+      }
     },
     "android": {
+      "package": "com.zubale.securecheckin",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#1a1a2e"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "We need camera access to take check-in photos at the store location."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "We need your location to verify you are at the store for check-in.",
+          "isAndroidBackgroundLocationEnabled": true
+        }
+      ],
+      "expo-sensors"
+    ]
   }
 }

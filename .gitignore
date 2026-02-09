@@ -39,3 +39,18 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Coverage
+coverage/
+
+# Claude Code agents (local)
+.claude/
+.agents/
+.kiro/
+.windsurf/
+
+# Challenge PDF
+*.pdf
+
+# Plan files
+plan.md
