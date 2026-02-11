@@ -44,6 +44,8 @@ yarn-error.*
 coverage/
 
 # Claude Code agents (local)
+CLAUDE.md
+.agent/
 .claude/
 .agents/
 .kiro/
@@ -54,3 +56,6 @@ coverage/
 
 # Plan files
 plan.md
+
+# Release artifacts directory
+releases/
