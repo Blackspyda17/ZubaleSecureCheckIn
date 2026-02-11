@@ -34,7 +34,7 @@ src/
 
 ### Android APK
 
-**Note**: Due to the APK size (146 MB), download it from [GitHub Releases](https://github.com/[username]/ZubaleSecureCheckIn/releases/tag/v1.0.0)
+**Note**: Due to the APK size (146 MB), download it from [GitHub Releases](https://github.com/Blackspyda17/ZubaleSecureCheckIn/releases/tag/v1.0.0)
 
 #### Installation Steps
 
