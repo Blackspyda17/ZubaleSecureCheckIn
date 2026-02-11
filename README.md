@@ -30,6 +30,42 @@ src/
   constants/            # Configuration (target location, thresholds)
 ```
 
+## Download & Install
+
+### Android APK
+
+**Note**: Due to the APK size (146 MB), download it from [GitHub Releases](https://github.com/[username]/ZubaleSecureCheckIn/releases/tag/v1.0.0)
+
+#### Installation Steps
+
+1. **Enable Unknown Sources**
+   - Go to Settings > Security (or Apps & Notifications > Special app access)
+   - Enable "Install unknown apps" for your browser or file manager
+
+2. **Download & Install**
+   - Download the APK from GitHub Releases
+   - Open the APK file on your Android device
+   - Tap "Install"
+
+3. **Grant Permissions**
+   - When prompted, grant Camera and Location permissions
+   - Both are required for the app to function
+
+4. **Test the Geofence**
+   - The default target location is in Golfito, Costa Rica (8.639°, -83.162°)
+   - To test at your location: modify `TARGET_LOCATION` in `src/constants/config.ts` and rebuild
+
+#### System Requirements
+- Android 5.0 (Lollipop) or higher (API 21+)
+- 150+ MB free storage
+- GPS and Camera hardware
+- Internet connection (for sync; offline mode supported)
+
+#### Build Information
+See [BUILD_INFO.md](./releases/v1.0.0/BUILD_INFO.md) for detailed build metadata, SHA256 checksum, and technical specifications.
+
+---
+
 ### Key Architectural Decisions
 
 | Decision | Choice | Why |
@@ -102,17 +138,34 @@ npm test
 npm run lint
 ```
 
-### Build APK
+### Build from Source
 
+#### Development Build
 ```bash
-# Local Android build
-npx expo run:android --variant release
-
-# Or via EAS (cloud)
-npx eas build --platform android --profile preview
+# Run on connected device/emulator
+npx expo run:android  # Android
+npx expo run:ios      # iOS
 ```
 
+#### Production APK
+```bash
+# Build release APK (unsigned)
+npx expo run:android --variant release --no-install
+
+# Output: android/app/build/outputs/apk/release/app-release.apk
+```
+
+**Note**: The unsigned APK is sufficient for testing on real devices. For Google Play Store distribution, sign with a production keystore using `jarsigner` or configure signing in `android/app/build.gradle`.
+
 ## Testing the Geofence
+
+### Quick Test (Pre-built APK)
+1. [Download the APK from GitHub Releases](https://github.com/[username]/ZubaleSecureCheckIn/releases/tag/v1.0.0)
+2. Install on your Android device (see [installation instructions above](#download--install))
+3. The app uses the default location in Golfito, Costa Rica
+4. To test at your location, you'll need to build from source (see below)
+
+### Testing from Source
 
 The target location is configured in `src/constants/config.ts`:
 
