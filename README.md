@@ -174,7 +174,7 @@ npx expo run:android --variant release --no-install
 ## Testing the Geofence
 
 ### Quick Test (Pre-built APK)
-1. [Download the APK from GitHub Releases](https://github.com/[username]/ZubaleSecureCheckIn/releases/tag/v1.0.0)
+1. [Download the APK from GitHub Releases](https://github.com/Blackspyda17/ZubaleSecureCheckIn/releases/tag/v1.0.0)
 2. Install on your Android device (see [installation instructions above](#download--install))
 3. The app uses the default location in Golfito, Costa Rica
 4. To test at your location, you'll need to build from source (see below)
