@@ -51,6 +51,9 @@ CLAUDE.md
 .kiro/
 .windsurf/
 
+# Release APKs (uploaded to GitHub Releases manually)
+*.apk
+
 # Challenge PDF
 *.pdf
 
