@@ -4,6 +4,20 @@
 
 A React Native app that verifies physical presence at a store location via geofencing, captures photos with a custom camera (no system picker), and burns GPS/date watermarks onto images for anti-fraud.
 
+## Demo
+
+### Check-In Flow
+Full check-in process: geofence verification, camera capture, GPS watermark applied, and photo submission with offline support.
+
+[Watch Demo Video](https://drive.google.com/file/d/1RQ1WmQ4RCTUVVAm8pbmWhmPwiGpL29oi/view?usp=sharing)
+
+### Mock Location Detection (Bonus)
+Detecting and blocking fake GPS locations using Android system flags and teleportation heuristics (impossible speed between location updates).
+
+[Watch Demo Video](https://drive.google.com/file/d/1JbRDQJPQhCEZ2xmL7OonS_jaJntJK-Bo/view?usp=sharing)
+
+---
+
 ## Architecture Overview
 
 ```

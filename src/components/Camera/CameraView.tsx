@@ -19,6 +19,7 @@ interface CameraViewProps {
 /**
  * Custom camera view with watermark preview overlay and compass.
  * Does NOT use the system image picker - custom camera as required.
+ * Overlays are rendered as siblings with absolute positioning (CameraView does not support children).
  */
 export function CustomCameraView({
   watermarkData,
@@ -41,7 +42,7 @@ export function CustomCameraView({
     try {
       const photo = await cameraRef.current.takePictureAsync({
         base64: true,
-        quality: 0.85,
+        quality: 0.5,
         exif: false,
       });
 
@@ -49,7 +50,7 @@ export function CustomCameraView({
         onPhotoCaptured(photo.base64);
       }
     } catch (error) {
-      console.error('Failed to capture photo:', error);
+      // Photo capture failed - UI will remain in ready state
     } finally {
       setIsCapturing(false);
     }
@@ -61,48 +62,51 @@ export function CustomCameraView({
 
   return (
     <View style={styles.container}>
-      <ExpoCameraView ref={cameraRef} style={styles.camera} facing={facing}>
-        {/* Compass overlay - bonus feature */}
-        <CompassOverlay
-          bearingToTarget={bearingToTarget}
-          distanceMeters={distanceMeters}
-          targetName={targetName}
-        />
+      {/* Camera feed - no children allowed */}
+      <ExpoCameraView ref={cameraRef} style={styles.camera} facing={facing} />
 
-        {/* Geofence status badge */}
-        <View
-          style={[
-            styles.statusBadge,
-            isWithinFence ? styles.withinFence : styles.outsideFence,
-          ]}
-        >
-          <Text style={styles.statusText}>
-            {isWithinFence
-              ? `Within range (${formatDistance(distanceMeters)})`
-              : `Out of range (${formatDistance(distanceMeters)})`}
+      {/* All overlays rendered as siblings with absolute positioning */}
+
+      {/* Compass overlay - bonus feature */}
+      <CompassOverlay
+        bearingToTarget={bearingToTarget}
+        distanceMeters={distanceMeters}
+        targetName={targetName}
+      />
+
+      {/* Geofence status badge */}
+      <View
+        style={[
+          styles.statusBadge,
+          isWithinFence ? styles.withinFence : styles.outsideFence,
+        ]}
+      >
+        <Text style={styles.statusText}>
+          {isWithinFence
+            ? `Within range (${formatDistance(distanceMeters)})`
+            : `Out of range (${formatDistance(distanceMeters)})`}
+        </Text>
+      </View>
+
+      {/* Watermark preview overlay */}
+      <View style={styles.watermarkPreview}>
+        {watermarkLines.map((line, index) => (
+          <Text key={index} style={styles.watermarkText}>
+            {line}
           </Text>
-        </View>
+        ))}
+      </View>
 
-        {/* Watermark preview overlay */}
-        <View style={styles.watermarkPreview}>
-          {watermarkLines.map((line, index) => (
-            <Text key={index} style={styles.watermarkText}>
-              {line}
-            </Text>
-          ))}
-        </View>
-
-        {/* Bottom controls */}
-        <View style={styles.controls}>
-          <TouchableText onPress={toggleFacing} text="Flip" />
-          <CaptureButton
-            onCapture={handleCapture}
-            disabled={!isWithinFence}
-            isCapturing={isCapturing}
-          />
-          <View style={styles.placeholder} />
-        </View>
-      </ExpoCameraView>
+      {/* Bottom controls */}
+      <View style={styles.controls}>
+        <TouchableText onPress={toggleFacing} text="Flip" />
+        <CaptureButton
+          onCapture={handleCapture}
+          disabled={!isWithinFence}
+          isCapturing={isCapturing}
+        />
+        <View style={styles.placeholder} />
+      </View>
     </View>
   );
 }
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   camera: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
   },
   statusBadge: {
     position: 'absolute',

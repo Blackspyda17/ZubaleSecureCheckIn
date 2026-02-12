@@ -5,8 +5,8 @@ import { TargetLocation } from '../types';
 // Change these to coordinates near your location for easy testing
 export const TARGET_LOCATION: TargetLocation = {
   coords: {
-    latitude: 8.639,
-    longitude: -83.162,
+    latitude: 8.644503,
+    longitude: -83.174495,
   },
   name: 'Zubale Store - Golfito',
   address: 'Centro Comercial Golfito, Costa Rica',

@@ -58,7 +58,8 @@ export async function applyWatermark(
   canvas.drawRect(bgRect, bgPaint);
 
   // Draw text lines
-  const font = Skia.Font(undefined, fontSize);
+  const font = Skia.Font();
+  font.setSize(fontSize);
   const textPaint = Skia.Paint();
   textPaint.setColor(Skia.Color('white'));
 
